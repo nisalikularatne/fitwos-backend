@@ -1,0 +1,20 @@
+# package directories
+node_modules/*
+main/node_modules/*
+main/project/node_modules/*
+.nyc_output/
+jspm_packages
+
+# Serverless directories
+.serverless
+
+# webstorm
+.idea
+
+.env
+.docker-sync/daemon.log
+main/project/.DS_Store
+# node reports
+report.*.json
+.DS_Store
+main/coverage/*
