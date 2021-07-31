@@ -15,8 +15,8 @@
 // };
 //
 // // ADD A USER
-// const addUser = user => {
-//   return db("users").insert(user, "id");
+// const addUser = users => {
+//   return db("users").insert(users, "id");
 // };
 //
 // // UPDATE USER

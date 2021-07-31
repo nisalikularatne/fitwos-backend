@@ -3,6 +3,8 @@ exports.up = function(knex, Promise) {
     tbl.increments();
 
     tbl.string("name");
+    tbl.timestamp('created_at');
+    tbl.timestamp('updated_at');
   });
 };
 
