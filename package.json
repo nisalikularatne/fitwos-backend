@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Backend application of fitwos",
   "main": "index.js",
+  "engines": {
+    "node": "14.17.4"
+  },
   "scripts": {
     "test": "DB_ENV=testing jest --watch --verbose",
     "server": "nodemon index.js",
