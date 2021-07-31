@@ -42,7 +42,7 @@ module.exports = {
     useNullAsDefault: true,
 
     connection: "postgres://jlvtejfk:1QfTaPRsWiotros5VU7o4LWa3Wny_kap@rosie.db.elephantsql.com/jlvtejfk",
-
+    ssl: true,
     migrations: {
       directory: "./database/migrations"
     },
