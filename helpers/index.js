@@ -1,4 +1,4 @@
-const { FitwosError } = require('@fitwos/fitwos-application/utils/errors');
+const { FitwosError } = require('../utils/errors');
 const { v1: uuidV1 } = require('uuid');
 exports.schemaValidator = async (schema, body, queryParams = false) => {
     try {

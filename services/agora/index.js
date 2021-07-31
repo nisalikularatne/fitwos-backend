@@ -1,5 +1,5 @@
 const {RtcTokenBuilder, RtcRole} = require('agora-access-token')
-const {UUIDGenerator} = require('@fitwos/fitwos-application/helpers');
+const {UUIDGenerator} = require('../../helpers');
 exports.generateToken =async ({channelName, role}) => {
     const appID = process.env.APP_ID
     const appCertificate = process.env.PRIMARY_CERTIFICATE;

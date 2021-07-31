@@ -1,7 +1,7 @@
-const UserService = require('@fitwos/fitwos-application/services/users'),
-    UserSchema = require('@fitwos/fitwos-application/schemas/user'),
+const UserService = require('../../services/users'),
+    UserSchema = require('../../schemas/user'),
     HttpStatusCodes = require('http-status-codes'),
-    { schemaValidator } = require('@fitwos/fitwos-application/helpers');
+    { schemaValidator } = require('../../helpers');
 exports.create = async (req, res) => {
     await schemaValidator(UserSchema.create, { ...req.query, ...req.body });
     const {

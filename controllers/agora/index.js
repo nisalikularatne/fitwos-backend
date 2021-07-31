@@ -1,7 +1,7 @@
-const Agora = require('@fitwos/fitwos-application/services/agora'),
+const Agora = require('../../services/agora'),
     // AgoraSchema = require('@fitwos/fitwos-application/schemas/agora'),
     HttpStatusCodes = require('http-status-codes'),
-    { schemaValidator } = require('@fitwos/fitwos-application/helpers');
+    { schemaValidator } = require('../../helpers');
 exports.generateToken = async (req, res) => {
     console.log('show req from generate token',req);
     // await schemaValidator(AgoraSchema.generateToken, { ...req.query, ...req.body });

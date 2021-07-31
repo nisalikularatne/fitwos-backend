@@ -1,5 +1,5 @@
-const { FitwosError } = require('@fitwos/fitwos-application/utils/errors'),
-    Logger = require('@fitwos/fitwos-application/logger'),
+const { FitwosError } = require('../utils/errors'),
+    Logger = require('../logger'),
     { NotFoundError } = require('objection');
 
 exports.expressCallback = (controller) => {

@@ -1,4 +1,4 @@
-const User = require('@fitwos/fitwos-application/models/user');
+const User = require('../../models/user');
 require('dotenv').config({ path: '../../.env' });
 const jwt = require('jsonwebtoken');
 // const config = require('@fitwos/fitwos-application/config');

@@ -3,8 +3,8 @@ const server = express();
 
 const morgan = require("morgan");
 const cors = require("cors");
-const usersRouter = require("./routes/users-router.js");
-const apiV1Routes = require('@fitwos/fitwos-application/routes/api/v1');
+// const usersRouter = require("./routes/users-router.js");
+const apiV1Routes = require('./routes/api/v1');
 // Middleware
 server.use(cors());
 server.use(morgan("dev"));
