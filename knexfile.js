@@ -1,7 +1,9 @@
 require("dotenv").config();
 const pg = require("pg");
 // pg.defaults.ssl = true;
-console.log('check pool size',process.env);
+console.log('show whats happening');
+console.log('check production',process.env.NODE_ENV);
+console.log('check database',process.env.DATABASE_URL)
 module.exports = {
   development: {
     client: "pg",
