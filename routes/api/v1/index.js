@@ -1,6 +1,6 @@
 const { expressCallback } = require('@fitwos/fitwos-application/helpers/express');
 const express = require('express');
-
+//routes
 const apiV1Routes = express.Router(),
     UserController = require('@fitwos/fitwos-application/controllers/users'),
     AgoraController = require('@fitwos/fitwos-application/controllers/agora');
