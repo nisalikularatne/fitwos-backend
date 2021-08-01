@@ -3,7 +3,6 @@ const Agora = require('../../services/agora'),
     HttpStatusCodes = require('http-status-codes'),
     { schemaValidator } = require('../../helpers');
 exports.generateToken = async (req, res) => {
-    console.log('show req from generate token',req);
     // await schemaValidator(AgoraSchema.generateToken, { ...req.query, ...req.body });
     const {
         channelName,

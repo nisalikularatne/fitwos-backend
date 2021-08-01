@@ -2,10 +2,8 @@ const User = require('../../models/user');
 require('dotenv').config({ path: '../../.env' });
 const jwt = require('jsonwebtoken');
 // const config = require('@fitwos/fitwos-application/config');
-exports.create = ({ name }) => {
-    return User.query().insert({
-        name
-    });
+exports.get = ({ headers }) => {
+
 };
 
 // exports.login = async (identity = {}) => {

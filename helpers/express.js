@@ -6,7 +6,6 @@ exports.expressCallback = (controller) => {
     return async (req, res) => {
         try {
             let controllerResponse = await controller(req, res);
-            console.log('show controller response',controllerResponse);
             typeof controllerResponse !== typeof undefined && res.send(controllerResponse);
         } catch (e) {
             if (e instanceof NotFoundError) {
