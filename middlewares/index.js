@@ -10,6 +10,7 @@ exports.authentication = async (req, res, next) => {
 
 // print normal string
     req.user = user
+    console.log('show the user',user);
     next();
 
 }
