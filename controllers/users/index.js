@@ -6,7 +6,6 @@ exports.get = async (req, res) => {
     // await schemaValidator(UserSchema.create, { ...req.query, ...req.body });
     let headers = req.headers;
     let user = await UserService.get({headers});
-    res.header('location', `/users/${user.id}`);
-    res.status(HttpStatusCodes.CREATED);
+    res.status(HttpStatusCodes.OK);
     return user;
 };
