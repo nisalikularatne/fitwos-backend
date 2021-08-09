@@ -3,7 +3,7 @@ exports.up = function(knex) {
         table.string('given_name', 128).nullable();
         table.string('family_name', 128).nullable();
         table.string('email', 128);
-        table.uuid('user_uuid');
+        table.uuid('user_uuid').unique();
         table.boolean('email_verified');
     })
 };

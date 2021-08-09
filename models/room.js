@@ -1,7 +1,7 @@
 const Model = require('./base');
 
-class User extends Model {
-    static tableName = 'users';
+class Room extends Model {
+    static tableName = 'rooms';
 
     static getTableName() {
         return this.tableName;
@@ -16,27 +16,27 @@ class User extends Model {
     }
 
     static get relationMappings() {
-        const Room = require('../models/room');
+        const User = require('../models/user');
         const TabataWorkout = require('../models/tabataWorkout')
         return {
-            rooms: {
-                relation: Model.HasManyRelation,
-                modelClass: Room,
+            user: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
                 join: {
-                    from: 'users.id',
-                    to: 'rooms.room_user_host_id'
+                    from: 'rooms.room_user_host_id',
+                    to: 'users.id'
                 }
             },
             tabata_workouts:{
                 relation: Model.HasManyRelation,
                 modelClass: TabataWorkout,
                 join: {
-                    from: 'users.id',
-                    to: 'tabata_workouts.user_id'
+                    from: 'rooms.id',
+                    to: 'tabata_workouts.room_id'
                 }
             }
         };
     }
 }
 
-module.exports = User;
+module.exports = Room;

@@ -6,7 +6,10 @@
   "scripts": {
     "test": "DB_ENV=testing jest --watch --verbose",
     "server": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "migrate": "knex migrate:latest ",
+    "rollback": "knex migrate:rollback --all ",
+    "seed": "knex seed:run"
   },
   "keywords": [],
   "author": "",

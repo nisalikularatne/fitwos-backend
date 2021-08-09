@@ -4,6 +4,7 @@ exports.schemaValidator = async (schema, body, queryParams = false) => {
     try {
         return await schema.schema().validateAsync(body, { abortEarly: false });
     } catch (e) {
+        console.log('error',e);
         let error = e.details;
         let errorArray = [];
         let existsNot = error[0].type === 'any.exist';

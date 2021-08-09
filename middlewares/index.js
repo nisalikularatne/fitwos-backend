@@ -16,7 +16,7 @@ exports.authentication = async (req, res, next) => {
     const buff = Buffer.from(userInfo, 'base64');
     const user = buff.toString('utf-8');
 // print normal string
-    req.user = user
+    req.user = JSON.parse(user)
     console.log('show the user', user);
     next();
 
