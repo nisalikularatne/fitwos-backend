@@ -1,5 +1,5 @@
 const TabataWorkout = require('../../models/tabataWorkout');
-const User = require('../../models/User');
+const User = require('../../models/user');
 const {MAX_ITEMS_PER_PAGE} = require("../../config");
 require('dotenv').config({path: '../../.env'});
 exports.create = async ({room_id, set, warm_up_down, rest, exercise_time, user, exercise_id}) => {
