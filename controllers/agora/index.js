@@ -1,9 +1,10 @@
 const Agora = require('../../services/agora'),
-    // AgoraSchema = require('@fitwos/fitwos-application/schemas/agora'),
+    Room = require('../../models/room'),
+    AgoraSchema = require('../../schemas/agora'),
     HttpStatusCodes = require('http-status-codes'),
     { schemaValidator } = require('../../helpers');
 exports.generateToken = async (req, res) => {
-    // await schemaValidator(AgoraSchema.generateToken, { ...req.query, ...req.body });
+    await schemaValidator(AgoraSchema.generateToken, { ...req.query, ...req.body });
     const {
         channelName,
         uid,
@@ -14,7 +15,8 @@ exports.generateToken = async (req, res) => {
     });
     // res.header('location', `/users/${users.id}`);
     // res.status(HttpStatusCodes.CREATED);
-    return user;
+    let room = await Room.query().withGraphFetched('[user,tabata_workouts]').where('name', channelName).first().throwIfNotFound();
+    return {...user,room};
 };
 
 
