@@ -8,7 +8,7 @@ exports.generateToken = {
         return joi.object().keys({
             role:joi.string().max(60).optional(),
             uid:joi.string().uuid().external(exist(User, 'uid', 'user_uuid')).required(),
-            channelName:joi.string().external(exist(Room,'channelName','name')).required()
+            channelName:joi.string().uuid().external(exist(Room,'channelName','room_uuid')).required()
         });
     }
 };

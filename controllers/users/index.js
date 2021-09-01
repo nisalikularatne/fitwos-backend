@@ -2,6 +2,7 @@ const UserService = require('../../services/users'),
     UserSchema = require('../../schemas/user'),
     HttpStatusCodes = require('http-status-codes'),
     {schemaValidator} = require('../../helpers');
+const {S3} = require("../../helpers/aws");
 exports.get = async (req, res) => {
     // await schemaValidator(UserSchema.create, { ...req.query, ...req.body });
     let headers = req.headers;
@@ -9,3 +10,13 @@ exports.get = async (req, res) => {
     res.status(HttpStatusCodes.OK);
     return user;
 };
+exports.imageUpload= async(req,res)=>{
+    const { body } = req || {}
+    const { filename, Attachment } = body || {}
+    console.log('show s3',S3);
+    //TODO:process.env to config
+    return await S3.upload({
+        filename,
+        file:Attachment
+    }, process.env.S3_BUCKET, process.env.BUCKET_PATH)
+}

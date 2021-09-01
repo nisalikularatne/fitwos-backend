@@ -15,7 +15,7 @@ exports.generateToken = async (req, res) => {
     });
     // res.header('location', `/users/${users.id}`);
     // res.status(HttpStatusCodes.CREATED);
-    let room = await Room.query().withGraphFetched('[user,tabata_workouts]').where('name', channelName).first().throwIfNotFound();
+    let room = await Room.query().withGraphFetched('[user,tabata_workouts]').where('room_uuid', channelName).first().throwIfNotFound();
     return {...user,room};
 };
 

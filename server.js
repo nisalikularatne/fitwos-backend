@@ -10,7 +10,8 @@ const apiV1Routes = require('./routes/api/v1');
 
 server.use(cors());
 server.use(morgan("dev"));
-server.use(express.json());
+
+server.use(express.json({limit: '50mb'}));
 
 server.use(userInfoMiddleware.authentication);
 //Routes

@@ -1,12 +1,13 @@
 const Room = require('../../models/room');
 const User = require('../../models/user');
 const {MAX_ITEMS_PER_PAGE} = require("../../config");
+const {UUIDGenerator} = require('../../helpers')
 require('dotenv').config({path: '../../.env'});
 exports.create = async ({start_at, end_at, name, user, is_scheduled}) => {
     console.log('user sub', user.exp)
     let userObject = await User.query().where({user_uuid: user.sub}).first()
     return Room.query().insert({
-        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled
+        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled,room_uuid:UUIDGenerator()
     });
 };
 

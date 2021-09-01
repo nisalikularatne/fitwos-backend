@@ -11,7 +11,8 @@ const {
     userJoin,
     getCurrentUser,
     userLeave,
-    getRoomUsers
+    getRoomUsers,
+    emptyRoomUsers
 } = require('./utils/users');
 /**
  * Get port from environment and store in Express.
@@ -31,8 +32,9 @@ var io = socketio(server);
 io.on('connection',(socket)=>{
     console.log('show the socket',socket.rooms);
     console.log('socket is ready for connection');
-    socket.on('joinRoom', ({ username, room }) => {
-        const user = userJoin(socket.id, username, room);
+    socket.on('joinRoom', ({ ...roomObject }) => {
+        console.log('show room object',roomObject,socket.id);
+        const user = userJoin(socket.id, roomObject.user.name, roomObject.room_uuid,roomObject.user.user_uuid);
         console.log('showuser',user)
         socket.join(user.room);
         // // Welcome current user
@@ -51,16 +53,37 @@ io.on('connection',(socket)=>{
             room: user.room,
             users: getRoomUsers(user.room)
         });
+        io.to(user.room).emit('roomSettings', {
+            ...roomObject
+        });
 
     })
+
+
     // Listen for messages
     socket.on('chatMessage', msg => {
         console.log('chat message trigger');
         const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('message', {username:user.username,message:msg.message,room:user.room});
+        io.to(user.room).emit('message', msg);
     });
+    var countdown;
+    let value;
+    socket.on('start_timer',({ ...roomObject })=>{
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('timer', {message:`${user.username} has started the timer`,room:user.room});
+    })
+    socket.on('pause_timer',({...roomObject})=>{
+        console.log('show socket',socket.id)
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('timer', {message:`${user.username} has paused the timer`,room:user.room});
+    })
+    socket.on('end_timer',({...roomObject})=>{
+        console.log('show socket',socket.id)
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('timer', {message:`${user.username} has ended the timer`,room:user.room});
+    })
     socket.on('disconnect', (msg) => {
-        console.log('disconnect triggered')
+        console.log('disconnect triggered',socket.id)
         const user = userLeave(socket.id);
         console.log('show user',user)
         if (user) {
@@ -76,6 +99,20 @@ io.on('connection',(socket)=>{
             });
         }
     });
+
+    socket.on('endRoom',msg=>{
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit(
+            'message',
+            {username:user.username,message:'User has ended room',room:user.room}
+        );
+        userLeave(socket.id);
+        io.socketsLeave(user.room);
+
+
+
+    })
+
 })
 /**
  * Listen on provided port, on all network interfaces.

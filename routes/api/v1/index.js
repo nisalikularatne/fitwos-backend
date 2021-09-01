@@ -9,6 +9,7 @@ const apiV1Routes = express.Router(),
     ExerciseController = require('../../../controllers/exercises');
 
 apiV1Routes.get('/users', expressCallback(UserController.get));
+apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
 apiV1Routes.get('/agora/generateToken',expressCallback(AgoraController.generateToken));
 //rooms
 apiV1Routes.post('/rooms',expressCallback(RoomController.create));
