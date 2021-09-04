@@ -7,11 +7,10 @@ exports.generateToken = async (req, res) => {
     await schemaValidator(AgoraSchema.generateToken, { ...req.query, ...req.body });
     const {
         channelName,
-        uid,
-        role
+        uid
     } = req.body;
     let user = await Agora.generateToken({
-        channelName,uid,role
+        channelName,uid
     });
     // res.header('location', `/users/${users.id}`);
     // res.status(HttpStatusCodes.CREATED);
