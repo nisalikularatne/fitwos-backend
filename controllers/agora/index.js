@@ -9,6 +9,7 @@ exports.generateToken = async (req, res) => {
         channelName,
         uid
     } = req.body;
+    console.log('show values',channelName,uid);
     let user = await Agora.generateToken({
         channelName,uid
     });
