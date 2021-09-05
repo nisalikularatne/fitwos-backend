@@ -30,25 +30,17 @@ const socketio = require('socket.io');
 var io = socketio(server);
 
 io.on('connection',(socket)=>{
-    console.log('show the socket',socket.rooms);
     console.log('socket is ready for connection');
     socket.on('joinRoom', ({ ...roomObject }) => {
-        console.log('show room object',roomObject,socket.id);
         const user = userJoin(socket.id, roomObject.user.name, roomObject.room_uuid,roomObject.user.user_uuid);
-        console.log('showuser',user)
         socket.join(user.room);
-        // // Welcome current user
         socket.emit('message', 'Welcome to Fitwos '+user.username);
-        //
-        // // Broadcast when a user connects
         socket.broadcast
             .to(user.room)
             .emit(
                 'message',
                `${user.username} has joined the call`
             );
-
-        // Send users and room info
         io.to(user.room).emit('roomUsers', {
             room: user.room,
             users: getRoomUsers(user.room)
@@ -58,7 +50,6 @@ io.on('connection',(socket)=>{
         });
 
     })
-
 
     // Listen for messages
     socket.on('chatMessage', msg => {
