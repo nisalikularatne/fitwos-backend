@@ -10,7 +10,7 @@ const apiV1Routes = express.Router(),
 
 apiV1Routes.get('/users', expressCallback(UserController.get));
 apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
-apiV1Routes.get('/agora/generateToken',expressCallback(AgoraController.generateToken));
+apiV1Routes.post('/agora/generateToken',expressCallback(AgoraController.generateToken));
 //rooms
 apiV1Routes.post('/rooms',expressCallback(RoomController.create));
 apiV1Routes.get('/rooms',expressCallback(RoomController.getAll));
