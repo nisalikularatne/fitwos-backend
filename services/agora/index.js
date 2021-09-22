@@ -1,5 +1,4 @@
 const {RtcTokenBuilder, RtcRole} = require('agora-access-token')
-const {UUIDGenerator} = require('../../helpers');
 exports.generateToken =async ({channelName,user, role}) => {
     const appID = process.env.APP_ID
     const appCertificate = process.env.PRIMARY_CERTIFICATE;
@@ -16,6 +15,6 @@ exports.generateToken =async ({channelName,user, role}) => {
 // Build token with uid
     return {
         uid: uidValue,
-        token: RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName, user, agoraRole, privilegeExpiredTs)
+        token: RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName,uidValue, agoraRole, privilegeExpiredTs)
     };
 }

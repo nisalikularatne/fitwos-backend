@@ -32,7 +32,7 @@ var io = socketio(server);
 io.on('connection',(socket)=>{
     console.log('socket is ready for connection');
     socket.on('joinRoom', ({ ...roomObject }) => {
-        const user = userJoin(socket.id, roomObject.user.name, roomObject.room_uuid,roomObject.user.user_uuid);
+        const user = userJoin(socket.id, roomObject.user.name, roomObject.room_uuid,roomObject.agoraUID);
         socket.join(user.room);
         socket.emit('message', 'Welcome to Fitwos '+user.username);
         socket.broadcast
