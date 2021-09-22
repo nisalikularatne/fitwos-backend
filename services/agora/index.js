@@ -1,9 +1,10 @@
 const {RtcTokenBuilder, RtcRole} = require('agora-access-token')
+const {convertUUID4toUint32} = require('../../helpers/index');
 exports.generateToken =async ({channelName,user, role}) => {
     const appID = process.env.APP_ID
     const appCertificate = process.env.PRIMARY_CERTIFICATE;
     const agoraRole = role === 'publisher' ? RtcRole.PUBLISHER : RtcRole.SUBSCRIBER;
-    const uidValue =user;
+    const uidValue =convertUUID4toUint32(user);
     const expirationTimeInSeconds = 3600
 
     const currentTimestamp = Math.floor(Date.now() / 1000)
