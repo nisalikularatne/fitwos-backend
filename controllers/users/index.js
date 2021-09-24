@@ -13,7 +13,6 @@ exports.get = async (req, res) => {
 exports.imageUpload= async(req,res)=>{
     const { body } = req || {}
     const { filename, Attachment } = body || {}
-    console.log('show s3',S3);
     //TODO:process.env to config
     return await S3.upload({
         filename,

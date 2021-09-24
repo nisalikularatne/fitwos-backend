@@ -1,6 +1,7 @@
 const RoomService = require('../../services/rooms'),
     HttpStatusCodes = require('http-status-codes'),
     RoomSchema = require('../../schemas/room'),
+    {getRoomUsers} = require('../../utils/users'),
     {schemaValidator} = require('../../helpers');
 const {DEFAULT_ITEMS_PER_PAGE} = require("../../config");
 exports.create = async (req, res) => {
@@ -45,5 +46,12 @@ exports.delete = async (req, res) => {
 exports.get = async (req, res) => {
     let {id} = req.params;
     await schemaValidator(RoomSchema.get, {id});
+    console.log('show participants',getRoomUsers('6d90b810-0d48-11ec-ba8f-599d525ad325'));
     return await RoomService.getRoom(id);
+}
+
+exports.getParticipants = async (req,res)=> {
+    console.log('show the values',req.params);
+    let {room_uuid} = req.params;
+    return getRoomUsers(room_uuid);
 }
