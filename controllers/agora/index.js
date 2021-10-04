@@ -12,6 +12,7 @@ exports.generateToken = async (req, res) => {
     let user = await Agora.generateToken({
         channelName,user:userObject
     });
+    console.log('show user details',userObject);
     // res.header('location', `/users/${users.id}`);
     // res.status(HttpStatusCodes.CREATED);
     let room = await Room.query().withGraphFetched('[user,tabata_workouts]').where('room_uuid', channelName).first().throwIfNotFound();
