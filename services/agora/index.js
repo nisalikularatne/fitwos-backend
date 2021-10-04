@@ -18,6 +18,7 @@ exports.generateToken =async ({channelName,user, role}) => {
     console.log('check output values',uidValue);
     console.log('details of generate token',token)
     console.log('channel name',channelName);
+    console.log('test')
     return {
         uid: uidValue,
         token
