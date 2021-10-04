@@ -14,9 +14,12 @@ exports.generateToken =async ({channelName,user, role}) => {
 // IMPORTANT! Build token with either the uid or with the users account. Comment out the option you do not want to use below.
 
 // Build token with uid
+    let token = RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName,uidValue, agoraRole, privilegeExpiredTs)
     console.log('check output values',uidValue);
+    console.log('details of generate token',token)
+    console.log('channel name',channelName);
     return {
         uid: uidValue,
-        token: RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName,uidValue, agoraRole, privilegeExpiredTs)
+        token
     };
 }
