@@ -17,6 +17,6 @@ exports.generateToken =async ({channelName,user, role}) => {
     console.log('check output values',uidValue);
     return {
         uid: uidValue,
-        token: RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName,uidValue, agoraRole, privilegeExpiredTs)
+        token: RtcTokenBuilder.buildTokenWithUid(appID, appCertificate, channelName,0, agoraRole, privilegeExpiredTs)
     };
 }
