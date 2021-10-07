@@ -18,3 +18,4 @@ main/project/.DS_Store
 report.*.json
 .DS_Store
 main/coverage/*
+.vscode
