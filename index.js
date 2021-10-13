@@ -62,7 +62,9 @@ io.on('connection',(socket)=>{
     let value;
     socket.on('start_timer',({ ...roomObject })=>{
         const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('timer', {message:`${user.username} has started the timer`,room:user.room});
+        io.to(user.room).emit('timer', 
+        {hostId:`${user.id}`,timerEvent:'start',message:`${user.username} has started the timer`,room:user.room}
+        );
     })
     socket.on('pause_timer',({...roomObject})=>{
         console.log('show socket',socket.id)
@@ -72,7 +74,7 @@ io.on('connection',(socket)=>{
     socket.on('end_timer',({...roomObject})=>{
         console.log('show socket',socket.id)
         const user = getCurrentUser(socket.id);
-        io.to(user.room).emit('timer', {message:`${user.username} has ended the timer`,room:user.room});
+        io.to(user.room).emit('timer', {hostId:`${user.id}`,timerEvent:'end',message:`${user.username} has ended the timer`,room:user.room});
     })
     socket.on('disconnect', (msg) => {
         console.log('disconnect triggered',socket.id)
