@@ -62,6 +62,8 @@ io.on('connection',(socket)=>{
     let value;
     socket.on('start_timer',({ ...roomObject })=>{
         const user = getCurrentUser(socket.id);
+        console.log(JSON.stringify(user));
+        console.log(`[WS: ${user.room}]: ` );
         io.to(user.room).emit('timer', 
         {hostId:`${user.id}`,timerEvent:'start',message:`${user.username} has started the timer`,room:user.room}
         );
