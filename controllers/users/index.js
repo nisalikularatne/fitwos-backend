@@ -12,7 +12,7 @@ exports.getUser = async (req, res) => {
 };
 exports.imageUpload= async(req,res)=>{
     const { body } = req || {}
-    const {id} = req.params;
+    const {id} = req.user;
     const { filename, Attachment } = body || {}
     let awsResponse = await S3.upload({
         filename,

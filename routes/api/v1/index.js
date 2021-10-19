@@ -6,10 +6,11 @@ const apiV1Routes = express.Router(),
     AgoraController = require('../../../controllers/agora'),
     RoomController = require('../../../controllers/rooms'),
     TabataWorkoutController = require('../../../controllers/tabataWorkouts'),
+    NotificationController = require('../../../controllers/notifications')
     ExerciseController = require('../../../controllers/exercises');
 
 apiV1Routes.get('/users', expressCallback(UserController.getUser));
-apiV1Routes.post('/users/:id/imageUpload',expressCallback(UserController.imageUpload));
+apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
 apiV1Routes.get('/users/:id',expressCallback(UserController.get));
 apiV1Routes.post('/agora/generateToken',expressCallback(AgoraController.generateToken));
 apiV1Routes.post('/users/:id/follow',expressCallback(UserController.follow));
@@ -32,4 +33,6 @@ apiV1Routes.get('/tabataWorkouts/rooms/:room_id',expressCallback(TabataWorkoutCo
 apiV1Routes.get('/tabataWorkouts/users/:user_id',expressCallback(TabataWorkoutController.getAllByUser))
 apiV1Routes.post('/tabataWorkouts/:id',expressCallback(TabataWorkoutController.update));
 apiV1Routes.delete('/tabataWorkouts/:id',expressCallback(TabataWorkoutController.delete));
+//notifications
+apiV1Routes.post('/notifications',expressCallback(NotificationController.create));
 module.exports = apiV1Routes;

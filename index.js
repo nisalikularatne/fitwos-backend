@@ -6,6 +6,8 @@
 
 var app = require('./server');
 var debug = require('debug')('expressapp:server');
+const cron = require('node-cron');
+const {roomToStart} = require('./processors/roomStart');
 var http = require('http');
 const {
     userJoin,
@@ -20,7 +22,10 @@ const {
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
+cron.schedule('* * * * * *', async function() {
+    console.log('running seconds');
+    await roomToStart()
+});
 /**
  * Create HTTP server.
  */
