@@ -2,11 +2,12 @@ const Exercise = require('../../models/exercise');
 const {MAX_ITEMS_PER_PAGE} = require("../../config");
 
 
-exports.getAll = async ({ page = 1, page_size = MAX_ITEMS_PER_PAGE, query = null, sort = 'id', order = 'asc', category, equipment,is_equipment}) => {
+exports.getAll = async ({ page = 1, page_size = MAX_ITEMS_PER_PAGE, query = null, sort = 'id', order = 'asc', category, equipment,is_equipment, gif}) => {
     return Exercise.query().modify(builder=>{
         query && builder.where('name', 'like', `%${query}%`);
         equipment && builder.where('equipment', 'like', `%${query}%`);
         category && builder.where('category', category);
+        gif && builder.whereNotNull('gif_image');
         if(is_equipment==='true'){
             builder.whereNotNull('equipment');
         }

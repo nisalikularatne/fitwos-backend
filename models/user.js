@@ -34,6 +34,32 @@ class User extends Model {
                     from: 'users.id',
                     to: 'tabata_workouts.user_id'
                 }
+            },
+            followers: {
+                relation: Model.ManyToManyRelation,
+                modelClass: User,
+                join: {
+                    from: 'users.id',
+                    through: {
+                        // persons_movies is the join table.
+                        from: 'follower_following.following_id',
+                        to: 'follower_following.follower_id'
+                    },
+                    to: 'users.id'
+                }
+            },
+            following: {
+                relation: Model.ManyToManyRelation,
+                modelClass: User,
+                join: {
+                    from: 'users.id',
+                    through: {
+                        // persons_movies is the join table.
+                        from: 'follower_following.follower_id',
+                        to: 'follower_following.following_id'
+                    },
+                    to: 'users.id'
+                }
             }
         };
     }

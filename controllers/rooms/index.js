@@ -1,4 +1,5 @@
 const RoomService = require('../../services/rooms'),
+    TabataWorkoutService = require('../../services/tabataWorkouts'),
     HttpStatusCodes = require('http-status-codes'),
     RoomSchema = require('../../schemas/room'),
     {getRoomUsers} = require('../../utils/users'),
@@ -6,9 +7,11 @@ const RoomService = require('../../services/rooms'),
 const {DEFAULT_ITEMS_PER_PAGE} = require("../../config");
 exports.create = async (req, res) => {
     await schemaValidator(RoomSchema.create, {...req.query, ...req.body});
-    let {start_at, end_at, name, is_scheduled} = req.body;
+    let {start_at, end_at, name, is_scheduled,set,warm_up_down,rest,exercise_time,exercises} = req.body;
     let user = req.user;
-    let room = await RoomService.create({start_at, end_at, name, user, is_scheduled});
+    let tabataWorkout = await TabataWorkoutService.create({set,warm_up_down,rest,exercise_time,user,exercises});
+    console.log('show the workout',tabataWorkout.id);
+    let room = await RoomService.create({start_at, end_at, name, user, is_scheduled,tabata_workout_id:tabataWorkout.id});
     res.status(HttpStatusCodes.CREATED);
     return room;
 };

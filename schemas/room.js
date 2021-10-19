@@ -7,7 +7,12 @@ exports.create = {
             name: joi.string().max(60).required(),
             is_scheduled: joi.boolean().optional(),
             start_at: joi.date().iso().greater('now').required(),
-            end_at: joi.date().iso().greater(joi.ref('start_at')).required()
+            end_at: joi.date().iso().greater(joi.ref('start_at')).required(),
+            set:joi.number().positive().required(),
+            warm_up_down:joi.number().positive().required(),
+            rest:joi.number().positive().required(),
+            exercise_time:joi.number().positive().required(),
+            exercises: joi.any().optional()
         });
     }
 };
@@ -19,6 +24,7 @@ exports.getAll = {
             order: joi.string().valid('asc', 'desc').allow('').optional(),
             start_at: joi.date().optional(),
             end_at: joi.date().optional(),
+            gif: joi.boolean().optional(),
             is_scheduled: joi.boolean().optional(),
             page: joi.number().positive().allow('').optional(),
             page_size: joi.number().positive().max(MAX_ITEMS_PER_PAGE).allow('').optional(),

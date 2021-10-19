@@ -6,12 +6,11 @@ const Room = require('../models/room'),
 exports.create = {
     schema: () => {
         return joi.object().keys({
-            room_id:joi.number().positive().external(exist(Room, 'room_id', 'id')),
             set:joi.number().positive().required(),
             warm_up_down:joi.number().positive().required(),
             rest:joi.number().positive().required(),
-            exercise_id:joi.number().positive().external(exist(Exercise, 'exercise_id', 'id')),
-            exercise_time:joi.number().positive().required()
+            exercise_time:joi.number().positive().required(),
+            exercises: joi.any().optional()
         });
     }
 };

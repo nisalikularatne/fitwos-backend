@@ -36,12 +36,17 @@ class TabataWorkout extends Model {
                     to: 'tabata_workouts.room_id'
                 }
             },
-            exercise: {
-                relation: Model.BelongsToOneRelation,
+            exercises: {
+                relation: Model.ManyToManyRelation,
                 modelClass: Exercise,
                 join: {
-                    from: 'exercises.id',
-                    to: 'tabata_workouts.exercise_id'
+                    from: 'tabata_workouts.id',
+                    through: {
+                        // persons_movies is the join table.
+                        from: 'tabata_workouts_exercises.tabata_workout_id',
+                        to: 'tabata_workouts_exercises.exercise_id'
+                    },
+                    to: 'exercises.id'
                 }
             }
         };

@@ -5,9 +5,9 @@ const TabataWorkoutService = require('../../services/tabataWorkouts'),
 
 exports.create = async (req, res) => {
     await schemaValidator(TabataWorkoutSchema.create, {...req.body});
-    let {room_id,set,warm_up_down,rest,exercise_time,exercise_id} = req.body;
+    let {set,warm_up_down,rest,exercise_time,exercises} = req.body;
     let user = req.user;
-    let tabataWorkout = await TabataWorkoutService.create({room_id,set,warm_up_down,rest,exercise_time,user,exercise_id});
+    let tabataWorkout = await TabataWorkoutService.create({set,warm_up_down,rest,exercise_time,user,exercises});
     res.status(HttpStatusCodes.CREATED);
     return tabataWorkout;
 };

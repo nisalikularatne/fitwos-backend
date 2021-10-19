@@ -3,12 +3,12 @@ const User = require('../../models/user');
 const {MAX_ITEMS_PER_PAGE} = require("../../config");
 const {UUIDGenerator} = require('../../helpers')
 require('dotenv').config({path: '../../.env'});
-exports.create = async ({start_at, end_at, name, user, is_scheduled}) => {
+exports.create = async ({start_at, end_at, name, user, is_scheduled,tabata_workout_id}) => {
     console.log('user sub', user.exp)
     let userObject = await User.query().where({user_uuid: user.sub}).first()
     return Room.query().insert({
-        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled,room_uuid:UUIDGenerator()
-    });
+        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled,room_uuid:UUIDGenerator(),tabata_workout_id
+    }).withGraphFetched('[user,tabata_workouts.[exercises]]');
 };
 
 exports.getRooms = async ({
@@ -30,7 +30,7 @@ exports.getRooms = async ({
         is_scheduled && builder.where('is_scheduled', is_scheduled);
         builder && builder.page(Number(page) - 1, page_size);
         builder.orderBy(sort, order);
-    }).where({is_deleted: false}).withGraphFetched('[user,tabata_workouts]');
+    }).where({is_deleted: false}).withGraphFetched('[user,tabata_workouts.[exercises]]');
 }
 
 exports.update = async (room_id, update_room) => {
@@ -51,5 +51,5 @@ exports.delete = async (room_id) => {
 }
 
 exports.getRoom = async (id) => {
-    return Room.query().withGraphFetched('[user,tabata_workouts]').where('id', id).first().throwIfNotFound();
+    return Room.query().withGraphFetched('[user,tabata_workouts.[exercises]]').where('id', id).first().throwIfNotFound();
 };

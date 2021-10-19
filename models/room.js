@@ -28,11 +28,11 @@ class Room extends Model {
                 }
             },
             tabata_workouts:{
-                relation: Model.HasManyRelation,
+                relation: Model.BelongsToOneRelation,
                 modelClass: TabataWorkout,
                 join: {
-                    from: 'rooms.id',
-                    to: 'tabata_workouts.room_id'
+                    from: 'rooms.tabata_workout_id',
+                    to: 'tabata_workouts.id'
                 }
             }
         };

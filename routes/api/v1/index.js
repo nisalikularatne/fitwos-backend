@@ -8,9 +8,12 @@ const apiV1Routes = express.Router(),
     TabataWorkoutController = require('../../../controllers/tabataWorkouts'),
     ExerciseController = require('../../../controllers/exercises');
 
-apiV1Routes.get('/users', expressCallback(UserController.get));
-apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
+apiV1Routes.get('/users', expressCallback(UserController.getUser));
+apiV1Routes.post('/users/:id/imageUpload',expressCallback(UserController.imageUpload));
+apiV1Routes.get('/users/:id',expressCallback(UserController.get));
 apiV1Routes.post('/agora/generateToken',expressCallback(AgoraController.generateToken));
+apiV1Routes.post('/users/:id/follow',expressCallback(UserController.follow));
+apiV1Routes.post('/users/:id/unfollow',expressCallback(UserController.unfollow));
 //rooms
 apiV1Routes.post('/rooms',expressCallback(RoomController.create));
 apiV1Routes.get('/rooms',expressCallback(RoomController.getAll));

@@ -12,9 +12,10 @@ exports.getAll = async (req, res) => {
         sort = 'created_at',
         order = 'asc',
         is_equipment,
-        category
+        category,
+        gif= false
     } = req.query;
-    let exerciseList = await ExerciseService.getAll({page, page_size, query, sort, order, is_equipment, category});
+    let exerciseList = await ExerciseService.getAll({page, page_size, query, sort, order, is_equipment, category, gif});
     res.status(HttpStatusCodes.OK);
     return exerciseList;
 };

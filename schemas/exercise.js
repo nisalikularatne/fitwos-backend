@@ -21,8 +21,8 @@ exports.getAll = {
             is_equipment: joi.boolean().optional(),
             page: joi.number().positive().allow('').optional(),
             page_size: joi.number().positive().max(MAX_ITEMS_PER_PAGE).allow('').optional(),
-            query: joi.any()
-
+            query: joi.any(),
+            gif: joi.boolean().optional()
         });
     }
 }
