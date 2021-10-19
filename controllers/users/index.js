@@ -28,11 +28,11 @@ exports.get=async(req,res)=>{
 }
 exports.follow = async(req,res)=>{
     const {followUsers} = req.body;
-    const {id} = req.params;
+    const {id} = req.user;
     return UserService.follow({followUsers,id})
 }
 exports.unfollow = async(req,res)=>{
     const {unfollowUsers} = req.body;
-    const {id} = req.params;
+    const {id} = req.user;
     return UserService.unfollow({unfollowUsers,id})
 }
