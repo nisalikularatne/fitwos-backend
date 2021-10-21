@@ -1,4 +1,5 @@
 const joi = require('@hapi/joi');
+const {MAX_ITEMS_PER_PAGE} = require("../config");
 
 exports.create = {
     schema: () => {
@@ -19,7 +20,28 @@ exports.getAll = {
         });
     }
 }
-
+exports.getFollowers = {
+    schema: () => {
+        return joi.object().keys({
+            sort: joi.string().valid('name', 'id').allow('').optional(),
+            order: joi.string().valid('asc', 'desc').allow('').optional(),
+            page: joi.number().positive().allow('').optional(),
+            page_size: joi.number().positive().max(MAX_ITEMS_PER_PAGE).allow('').optional(),
+            query: joi.any()
+        });
+    }
+}
+exports.getFollowing = {
+    schema: () => {
+        return joi.object().keys({
+            sort: joi.string().valid('name', 'id').allow('').optional(),
+            order: joi.string().valid('asc', 'desc').allow('').optional(),
+            page: joi.number().positive().allow('').optional(),
+            page_size: joi.number().positive().max(MAX_ITEMS_PER_PAGE).allow('').optional(),
+            query: joi.any()
+        });
+    }
+}
 exports.getByID = {
     schema: () => {
         return joi.object().keys({

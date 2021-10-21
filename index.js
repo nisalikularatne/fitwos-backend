@@ -23,7 +23,6 @@ const {
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 cron.schedule('* * * * * *', async function() {
-    console.log('running seconds');
     await roomToStart()
 });
 /**

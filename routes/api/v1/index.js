@@ -11,10 +11,12 @@ const apiV1Routes = express.Router(),
 
 apiV1Routes.get('/users', expressCallback(UserController.getUser));
 apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
-apiV1Routes.get('/users/:id',expressCallback(UserController.get));
+apiV1Routes.get('/users/getFollowers',expressCallback(UserController.getFollowers));
+apiV1Routes.get('/users/getFollowing',expressCallback(UserController.getFollowing));
 apiV1Routes.post('/agora/generateToken',expressCallback(AgoraController.generateToken));
 apiV1Routes.post('/users/follow',expressCallback(UserController.follow));
 apiV1Routes.post('/users/unfollow',expressCallback(UserController.unfollow));
+apiV1Routes.get('/users/:id',expressCallback(UserController.get));
 //rooms
 apiV1Routes.post('/rooms',expressCallback(RoomController.create));
 apiV1Routes.get('/rooms',expressCallback(RoomController.getAll));

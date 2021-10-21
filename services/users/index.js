@@ -49,3 +49,24 @@ exports.unfollow = async ({unfollowUsers,id})=>{
 //     }, config.ACCESS_TOKEN_SECRET, { expiresIn: 60 * 60 });
 //     return { token: token };
 // };
+
+exports.getFollowers= async(object)=>{
+    let {page, page_size, query, sort, order,id} = object;
+    let userObject = await User.query().findOne({user_uuid: id});
+    return userObject.$relatedQuery('followers').modify(builder => {
+        query && builder.where('name', 'like', `%${query}%`);
+        builder && builder.page(Number(page) - 1, page_size);
+        builder.orderBy(sort, order);
+    });
+
+}
+exports.getFollowing= async(object)=>{
+    let {page, page_size, query, sort, order,id} = object;
+    let userObject = await User.query().findOne({user_uuid: id});
+    return userObject.$relatedQuery('following').modify(builder => {
+        query && builder.where('name', 'like', `%${query}%`);
+        builder && builder.page(Number(page) - 1, page_size);
+        builder.orderBy(sort, order);
+    });
+
+}
