@@ -11,6 +11,7 @@ exports.create = {
             set:joi.number().positive().required(),
             warm_up_down:joi.number().positive().required(),
             rest:joi.number().positive().required(),
+            rest_interval:joi.number().positive().required(),
             exercise_time:joi.number().positive().required(),
             exercises: joi.any().optional()
         });

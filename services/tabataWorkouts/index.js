@@ -3,11 +3,11 @@ const User = require('../../models/user');
 const Exercise = require('../../models/exercise');
 const {MAX_ITEMS_PER_PAGE} = require("../../config");
 require('dotenv').config({path: '../../.env'});
-exports.create = async ({set, warm_up_down, rest, exercise_time, user,exercises}) => {
+exports.create = async ({set, warm_up_down, rest, exercise_time, user,exercises,rest_interval}) => {
     console.log('user sub', user.exp)
     let userObject = await User.query().where({user_uuid: user.sub}).first()
     let tabataWorkout = await TabataWorkout.query().insertAndFetch({
-         set, warm_up_down, rest, exercise_time, user_id: userObject.id
+         set, warm_up_down, rest, exercise_time, user_id: userObject.id, rest_interval
     });
     await tabataWorkout.$relatedQuery('exercises').relate(exercises);
     return tabataWorkout
