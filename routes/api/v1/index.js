@@ -28,6 +28,7 @@ apiV1Routes.get('/rooms/participants/:room_uuid',expressCallback(RoomController.
 apiV1Routes.get('/exercises',expressCallback(ExerciseController.getAll));
 apiV1Routes.post('/exercises',expressCallback(ExerciseController.create));
 apiV1Routes.post('/exercises/:id',expressCallback(ExerciseController.update));
+apiV1Routes.get('/exercises/:id',expressCallback(ExerciseController.get));
 apiV1Routes.delete('/exercises/:id',expressCallback(ExerciseController.delete));
 //workouts
 apiV1Routes.post('/tabataWorkouts',expressCallback(TabataWorkoutController.create));

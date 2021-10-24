@@ -12,10 +12,10 @@ exports.getAll = async (req, res) => {
         sort = 'created_at',
         order = 'asc',
         is_equipment,
-        category,
+        categories,
         gif= false
     } = req.query;
-    let exerciseList = await ExerciseService.getAll({page, page_size, query, sort, order, is_equipment, category, gif});
+    let exerciseList = await ExerciseService.getAll({page, page_size, query, sort, order, is_equipment, categories, gif});
     res.status(HttpStatusCodes.OK);
     return exerciseList;
 };
@@ -33,9 +33,15 @@ exports.delete = async (req, res) => {
 }
 
 exports.create = async (req, res) => {
-    let {name, category, equipment} = req.body;
+    let {name, categories, equipment} = req.body;
     let user = req.user;
-    let exercise = await ExerciseService.create({name, category, equipment, user});
+    let exercise = await ExerciseService.create({name, categories, equipment, user});
     res.status(HttpStatusCodes.CREATED);
     return exercise;
+}
+
+exports.get = async (req, res) => {
+    let {id} = req.params;
+    await schemaValidator(ExerciseSchema.get, {id});
+    return await ExerciseService.get(id);
 }

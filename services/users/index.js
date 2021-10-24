@@ -13,9 +13,9 @@ exports.getUser = async({ headers }) => {
     if(userInfo.data){
         user = await User.query().where('user_uuid', userInfo.data.sub).first();
         if(!user){
-            const {given_name,family_name,sub,email,email_verified,name} = userInfo.data;
+            const {given_name,family_name,sub,email,email_verified,name,preferred_name} = userInfo.data;
             user = await User.query().insert({
-                given_name,family_name,user_uuid:sub,email,email_verified,name
+                given_name,family_name,user_uuid:sub,email,email_verified,name,preferred_name
             })
         }
     }

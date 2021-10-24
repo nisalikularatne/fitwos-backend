@@ -16,7 +16,7 @@ exports.getAll = {
         return joi.object().keys({
             sort: joi.string().valid('name', 'category','equipment').allow('').optional(),
             order: joi.string().valid('asc', 'desc').allow('').optional(),
-            category:joi.string().optional(),
+            categories:joi.any(),
             equipment: joi.string().optional(),
             is_equipment: joi.boolean().optional(),
             page: joi.number().positive().allow('').optional(),

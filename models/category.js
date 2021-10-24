@@ -1,7 +1,7 @@
 const Model = require('./base');
 
-class Exercise extends Model {
-    static tableName = 'exercises';
+class Category extends Model {
+    static tableName = 'category';
 
     static getTableName() {
         return this.tableName;
@@ -16,22 +16,23 @@ class Exercise extends Model {
     }
 
     static get relationMappings() {
-        const Category = require('../models/category');
+        const Exercise = require('../models/exercise');
         return {
-            categories: {
+            exercises: {
                 relation: Model.ManyToManyRelation,
-                modelClass: Category,
+                modelClass: Exercise,
                 join: {
-                    from: 'exercises.id',
+                    from: 'category.id',
                     through: {
-                        from: 'exercise_category.exercise',
-                        to: 'exercise_category.category'
+                        // persons_movies is the join table.
+                        from: 'exercise_category.category',
+                        to: 'exercise_category.exercise'
                     },
-                    to: 'category.id'
+                    to: 'exercises.id'
                 }
             }
         };
     }
 }
 
-module.exports = Exercise;
+module.exports = Category;
