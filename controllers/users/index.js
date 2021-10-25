@@ -39,8 +39,7 @@ exports.unfollow = async(req,res)=>{
 }
 exports.getFollowers = async(req,res)=>{
     console.log('show followers');
-    const {id} = req.user;
-    console.log('show id',id);
+    const {id} = req.params;
     const {
         page = 1,
         page_size = DEFAULT_ITEMS_PER_PAGE,
@@ -52,7 +51,7 @@ exports.getFollowers = async(req,res)=>{
     return UserService.getFollowers({page, page_size, query, sort, order,id});
 }
 exports.getFollowing = async(req,res)=>{
-    const {id} = req.user;
+    const {id} = req.params;
     const {
         page = 1,
         page_size = DEFAULT_ITEMS_PER_PAGE,

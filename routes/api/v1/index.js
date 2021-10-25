@@ -11,8 +11,8 @@ const apiV1Routes = express.Router(),
 
 apiV1Routes.get('/users', expressCallback(UserController.getUser));
 apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
-apiV1Routes.get('/users/getFollowers',expressCallback(UserController.getFollowers));
-apiV1Routes.get('/users/getFollowing',expressCallback(UserController.getFollowing));
+apiV1Routes.get('/users/:id/getFollowers',expressCallback(UserController.getFollowers));
+apiV1Routes.get('/users/:id/getFollowing',expressCallback(UserController.getFollowing));
 apiV1Routes.post('/agora/generateToken',expressCallback(AgoraController.generateToken));
 apiV1Routes.post('/users/follow',expressCallback(UserController.follow));
 apiV1Routes.post('/users/unfollow',expressCallback(UserController.unfollow));
