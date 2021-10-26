@@ -19,3 +19,4 @@ report.*.json
 .DS_Store
 main/coverage/*
 .vscode
+**/*.sh
