@@ -13,7 +13,7 @@ exports.getAll = async ({
                             is_equipment,
                             gif
                         }) => {
-    const category_filters = categories && categories.split(',');
+    const category_filters = categories && categories.split(',').map(c=>c.toLowerCase().trim());
     return Exercise.query().modify(builder => {
         query && builder.where('exercises.name', 'ilike', `%${query}%`);
         equipment && builder.where('equipment', 'ilike', `%${query}%`);
