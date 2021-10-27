@@ -15,7 +15,7 @@ exports.getAll = async ({
                         }) => {
     const category_filters = categories && categories.split(',');
     return Exercise.query().modify(builder => {
-        query && builder.where('name', 'like', `%${query}%`);
+        query && builder.where('exercises.name', 'ilike', `%${query}%`);
         equipment && builder.where('equipment', 'like', `%${query}%`);
         gif && builder.whereNotNull('gif_image');
         if (is_equipment === 'true') {
