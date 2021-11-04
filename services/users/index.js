@@ -27,7 +27,7 @@ exports.saveImage = async (image_url,id)=>{
 }
 
 exports.get = async(id)=>{
-    return User.query().findOne({user_uuid: id}).withGraphFetched('[followers,following]').select(
+    return User.query().findOne({user_uuid: id}).select(
         [   'users.*',
             User.relatedQuery('followers').count().as('totalFollowers'),
             User.relatedQuery('following').count().as('totalFollowing')
