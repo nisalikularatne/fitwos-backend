@@ -27,7 +27,11 @@ exports.saveImage = async (image_url,id)=>{
 }
 
 exports.get = async(id)=>{
-    return User.query().findOne({user_uuid: id}).withGraphFetched('[followers,following]').throwIfNotFound();
+    return User.query().findOne({user_uuid: id}).withGraphFetched('[followers,following]').select(
+        [   'users.*',
+            User.relatedQuery('followers').count().as('totalFollowers'),
+            User.relatedQuery('following').count().as('totalFollowing')
+        ]).throwIfNotFound();
 }
 exports.follow = async({followUsers,id})=>{
     let userObject = await User.query().findOne({user_uuid: id});
