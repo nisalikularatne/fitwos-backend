@@ -32,7 +32,7 @@ exports.get = async(id, myId)=>{
             User.relatedQuery('followers').count().as('totalFollowers'),
             User.relatedQuery('following').count().as('totalFollowing'),
             User.relatedQuery('rooms').count().as('totalWorkouts'),
-            User.relatedQuery('followers').includes({user_uuid:myId}).as('imFollowing'),
+            User.relatedQuery('followers').findOne({user_uuid:myId}).count().as('isFollowing')
         ]).throwIfNotFound();
 }
 exports.follow = async({followUsers,id})=>{
