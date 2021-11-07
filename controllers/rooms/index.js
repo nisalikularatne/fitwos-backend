@@ -2,16 +2,22 @@ const RoomService = require('../../services/rooms'),
     TabataWorkoutService = require('../../services/tabataWorkouts'),
     HttpStatusCodes = require('http-status-codes'),
     RoomSchema = require('../../schemas/room'),
+    {S3} = require("../../helpers/aws"),
     {getRoomUsers} = require('../../utils/users'),
     {schemaValidator} = require('../../helpers');
 const {DEFAULT_ITEMS_PER_PAGE} = require("../../config");
 exports.create = async (req, res) => {
     await schemaValidator(RoomSchema.create, {...req.query, ...req.body});
-    let {start_at, end_at, name, is_scheduled,set,warm_up_down,rest,exercise_time,exercises,rest_interval,description} = req.body;
+    let {start_at, end_at, name, is_scheduled,set,warm_up_down,rest,exercise_time,exercises,rest_interval,description,Attachment} = req.body;
     let user = req.user;
     let tabataWorkout = await TabataWorkoutService.create({set,warm_up_down,rest,exercise_time,user,exercises,rest_interval});
     console.log('show the workout',tabataWorkout.id);
-    let room = await RoomService.create({start_at, end_at, name, user, is_scheduled,tabata_workout_id:tabataWorkout.id,description});
+    let awsResponse = await S3.upload({
+        name,
+        file:Attachment
+    }, process.env.S3_BUCKET, process.env.BUCKET_PATH)
+    const {url} = awsResponse;
+    let room = await RoomService.create({start_at, end_at, name, user, is_scheduled,tabata_workout_id:tabataWorkout.id,description,url});
     res.status(HttpStatusCodes.CREATED);
     return room;
 };

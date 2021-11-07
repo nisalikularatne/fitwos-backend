@@ -3,11 +3,11 @@ const User = require('../../models/user');
 const {MAX_ITEMS_PER_PAGE} = require("../../config");
 const {UUIDGenerator} = require('../../helpers')
 require('dotenv').config({path: '../../.env'});
-exports.create = async ({start_at, end_at, name, user, is_scheduled,tabata_workout_id,description}) => {
+exports.create = async ({start_at, end_at, name, user, is_scheduled,tabata_workout_id,description,url}) => {
     console.log('user sub', user.exp)
     let userObject = await User.query().where({user_uuid: user.sub}).first()
     return Room.query().insert({
-        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled,room_uuid:UUIDGenerator(),tabata_workout_id,description
+        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled,room_uuid:UUIDGenerator(),tabata_workout_id,description,url
     }).withGraphFetched('[user,tabata_workouts.[exercises]]');
 };
 
