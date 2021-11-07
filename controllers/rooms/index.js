@@ -8,12 +8,12 @@ const RoomService = require('../../services/rooms'),
 const {DEFAULT_ITEMS_PER_PAGE} = require("../../config");
 exports.create = async (req, res) => {
     await schemaValidator(RoomSchema.create, {...req.query, ...req.body});
-    let {start_at, end_at, name, is_scheduled,set,warm_up_down,rest,exercise_time,exercises,rest_interval,description,Attachment} = req.body;
+    let {start_at, end_at, name, is_scheduled,set,warm_up_down,rest,exercise_time,exercises,rest_interval,description,Attachment,filename} = req.body;
     let user = req.user;
     let tabataWorkout = await TabataWorkoutService.create({set,warm_up_down,rest,exercise_time,user,exercises,rest_interval});
     console.log('show the workout',tabataWorkout.id);
     let awsResponse = await S3.upload({
-        name,
+        filename,
         file:Attachment
     }, process.env.S3_BUCKET, process.env.BUCKET_PATH)
     const {url} = awsResponse;

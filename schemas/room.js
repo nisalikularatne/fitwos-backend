@@ -15,6 +15,8 @@ exports.create = {
             exercise_time:joi.number().positive().required(),
             exercises: joi.any().optional(),
             description: joi.string().max(100).optional().allow(''),
+            Attachment: joi.string().optional(),
+            filename: joi.string().optional()
         });
     }
 };

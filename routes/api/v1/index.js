@@ -16,6 +16,7 @@ apiV1Routes.get('/users/:id/getFollowing',expressCallback(UserController.getFoll
 apiV1Routes.post('/agora/generateToken',expressCallback(AgoraController.generateToken));
 apiV1Routes.post('/users/follow',expressCallback(UserController.follow));
 apiV1Routes.post('/users/unfollow',expressCallback(UserController.unfollow));
+apiV1Routes.put('/users/:id',expressCallback(UserController.edit));
 apiV1Routes.get('/users/:id',expressCallback(UserController.get));
 //rooms
 apiV1Routes.post('/rooms',expressCallback(RoomController.create));

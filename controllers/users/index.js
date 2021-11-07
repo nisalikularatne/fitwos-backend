@@ -11,6 +11,14 @@ exports.getUser = async (req, res) => {
     res.status(HttpStatusCodes.OK);
     return user;
 };
+exports.edit = async(req,res)=>{
+    let headers = req.headers;
+    let {id} = req.params;
+    const {firstName, lastName, email, emailVerified,Attachment,preffered_name} = req.body;
+    let user = await UserService.edit({headers,id,firstName,lastName,email,emailVerified});
+    res.status(HttpStatusCodes.OK);
+    return user;
+}
 exports.imageUpload= async(req,res)=>{
     const { body } = req || {}
     const {id} = req.user;

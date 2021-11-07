@@ -7,7 +7,7 @@ exports.create = async ({start_at, end_at, name, user, is_scheduled,tabata_worko
     console.log('user sub', user.exp)
     let userObject = await User.query().where({user_uuid: user.sub}).first()
     return Room.query().insert({
-        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled,room_uuid:UUIDGenerator(),tabata_workout_id,description,url
+        start_at, end_at, name, room_user_host_id: userObject.id, is_scheduled,room_uuid:UUIDGenerator(),tabata_workout_id,description,image_url:url
     }).withGraphFetched('[user,tabata_workouts.[exercises]]');
 };
 
