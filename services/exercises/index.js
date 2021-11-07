@@ -13,16 +13,17 @@ exports.getAll = async ({
                             is_equipment,
                             gif
                         }) => {
-    const category_filters = categories && categories.split(',');
+    const category_filters = categories && categories.split(',').map(c=>c.toLowerCase().trim());
     return Exercise.query().modify(builder => {
-        query && builder.where('name', 'like', `%${query}%`);
-        equipment && builder.where('equipment', 'like', `%${query}%`);
+        query && builder.where('exercises.name', 'ilike', `%${query}%`);
+        equipment && builder.where('equipment', 'ilike', `%${query}%`);
         gif && builder.whereNotNull('gif_image');
-        if (is_equipment === 'true') {
-            builder.whereNotNull('equipment');
-        } else if (is_equipment === 'false') {
-            builder.whereNull('equipment');
-        }
+        is_equipment && builder.where('exercises.is_equipment','=',is_equipment);
+        // if (is_equipment === 'true') {
+        //     builder.whereNotNull('equipment');
+        // } else if (is_equipment === 'false') {
+        //     builder.whereNull('equipment');
+        // }
         category_filters && builder.join('exercise_category', 'exercises.id', '=', 'exercise_category.exercise')
             .join('category','category.id','=','exercise_category.category').whereIn('category.name',category_filters)
         builder && builder.page(Number(page) - 1, page_size);

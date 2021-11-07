@@ -26,8 +26,14 @@ exports.saveImage = async (image_url,id)=>{
     return updatedObject.$query().patchAndFetch({image_url});
 }
 
-exports.get = async(id)=>{
-    return User.query().findOne({user_uuid: id}).withGraphFetched('[followers,following]').throwIfNotFound();
+exports.get = async(id, myId)=>{
+    return User.query().findOne({user_uuid: id}).select(
+        [   'users.*',
+            User.relatedQuery('followers').count().as('totalFollowers'),
+            User.relatedQuery('following').count().as('totalFollowing'),
+            User.relatedQuery('rooms').count().as('totalWorkouts'),
+            // TODO:: Add isFollowing by user boolean
+        ]).throwIfNotFound();
 }
 exports.follow = async({followUsers,id})=>{
     let userObject = await User.query().findOne({user_uuid: id});
