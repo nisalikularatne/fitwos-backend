@@ -33,8 +33,7 @@ exports.imageUpload= async(req,res)=>{
 
 exports.get=async(req,res)=>{
     const {id} =req.params;
-    const {myId=id} = req.user;
-    return UserService.get(id,myId);
+    return UserService.get(id,req.user.id);
 }
 exports.follow = async(req,res)=>{
     const {followUsers} = req.body;
