@@ -13,7 +13,7 @@ exports.create = async (req, res) => {
     let tabataWorkout = await TabataWorkoutService.create({set,warm_up_down,rest,exercise_time,user,exercises,rest_interval});
     console.log('show the workout',tabataWorkout.id);
     
-    let {url} = fileName && Attachment ? await S3.upload({
+    let {url} = filename && Attachment ? await S3.upload({
         filename,
         file:Attachment
     }, process.env.S3_BUCKET, process.env.BUCKET_PATH) : ""
