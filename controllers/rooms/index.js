@@ -17,7 +17,9 @@ exports.create = async (req, res) => {
         filename,
         file:Attachment
     }, process.env.S3_BUCKET, process.env.BUCKET_PATH) : ""
+    console.log(`Uploaded Image Url: ${url}`)
     let room = await RoomService.create({start_at, end_at, name, user, is_scheduled,tabata_workout_id:tabataWorkout.id,description,url});
+
     res.status(HttpStatusCodes.CREATED);
     return room;
 };
