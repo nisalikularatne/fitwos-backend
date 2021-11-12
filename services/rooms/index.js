@@ -53,3 +53,9 @@ exports.delete = async (room_id) => {
 exports.getRoom = async (id) => {
     return Room.query().withGraphFetched('[user,tabata_workouts.[exercises]]').where('id', id).first().throwIfNotFound();
 };
+
+exports.inviteUsers = async (id, users) =>{
+    let roomObject = await Room.query().findOne({id});
+    await roomObject.$relatedQuery('invited_users').relate(users);
+    return roomObject.$query().withGraphFetched('[invited_users]')
+}

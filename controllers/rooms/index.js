@@ -64,3 +64,9 @@ exports.getParticipants = async (req,res)=> {
     let {room_uuid} = req.params;
     return getRoomUsers(room_uuid);
 }
+exports.inviteUsers = async (req,res)=> {
+    let {id} = req.params;
+    console.log('show room',id)
+    let {users} = req.body
+    return RoomService.inviteUsers(id,users);
+}

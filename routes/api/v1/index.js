@@ -10,6 +10,7 @@ const apiV1Routes = express.Router(),
     ExerciseController = require('../../../controllers/exercises');
 
 apiV1Routes.get('/users', expressCallback(UserController.getUser));
+apiV1Routes.get('/users/:id/invite',expressCallback(UserController.getRoomInvites));
 apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
 apiV1Routes.get('/users/:id/getFollowers',expressCallback(UserController.getFollowers));
 apiV1Routes.get('/users/:id/getFollowing',expressCallback(UserController.getFollowing));
@@ -23,6 +24,7 @@ apiV1Routes.post('/rooms',expressCallback(RoomController.create));
 apiV1Routes.get('/rooms',expressCallback(RoomController.getAll));
 apiV1Routes.get('/rooms/:id',expressCallback(RoomController.get));
 apiV1Routes.post('/rooms/:id',expressCallback(RoomController.update));
+apiV1Routes.post('/rooms/:id/invite',expressCallback(RoomController.inviteUsers));
 apiV1Routes.delete('/rooms/:id',expressCallback(RoomController.delete));
 apiV1Routes.get('/rooms/participants/:room_uuid',expressCallback(RoomController.getParticipants));
 //exercises

@@ -27,6 +27,19 @@ class User extends Model {
                     to: 'rooms.room_user_host_id'
                 }
             },
+            invited_rooms: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Room,
+                join: {
+                    from: 'users.id',
+                    through: {
+                        // invitees_rooms is the join table.
+                        from: 'invitees_rooms.user_id',
+                        to: 'invitees_rooms.room_id'
+                    },
+                    to: 'rooms.id'
+                }
+            },
             tabata_workouts:{
                 relation: Model.HasManyRelation,
                 modelClass: TabataWorkout,

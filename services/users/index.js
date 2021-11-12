@@ -56,6 +56,7 @@ exports.get = async (id, myId) => {
             User.relatedQuery('followers').count().as('totalFollowers'),
             User.relatedQuery('following').count().as('totalFollowing'),
             User.relatedQuery('rooms').count().as('totalWorkouts'),
+            User.relatedQuery('invited_rooms').count().as('invited_rooms')
             // TODO:: Add isFollowing by user boolean
         ]).throwIfNotFound();
 }
@@ -99,4 +100,8 @@ exports.getFollowing = async (object) => {
         builder.orderBy(sort, order);
     });
 
+}
+exports.invitedRooms = async (id)=>{
+    const user = await User.query().findOne({user_uuid: id}).throwIfNotFound();
+    return user.$relatedQuery('invited_rooms');
 }

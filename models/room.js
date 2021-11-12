@@ -19,6 +19,19 @@ class Room extends Model {
         const User = require('../models/user');
         const TabataWorkout = require('../models/tabataWorkout')
         return {
+            invited_users:{
+                relation: Model.ManyToManyRelation,
+                modelClass: User,
+                join: {
+                    from: 'rooms.id',
+                    through: {
+                        // invitees_rooms is the join table.
+                        from: 'invitees_rooms.room_id',
+                        to: 'invitees_rooms.user_id'
+                    },
+                    to: 'users.id'
+                }
+            },
             user: {
                 relation: Model.BelongsToOneRelation,
                 modelClass: User,
