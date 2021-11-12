@@ -56,6 +56,7 @@ exports.get = async (id, myId) => {
             User.relatedQuery('followers').count().as('totalFollowers'),
             User.relatedQuery('following').count().as('totalFollowing'),
             User.relatedQuery('rooms').count().as('totalWorkouts'),
+            User.relatedQuery("followers").findOne({ user_uuid: myId }).count('user_uuid').as("isFollowing")
             User.relatedQuery('invited_rooms').count().as('invited_rooms')
             // TODO:: Add isFollowing by user boolean
         ]).throwIfNotFound();

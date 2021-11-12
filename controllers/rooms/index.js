@@ -6,18 +6,20 @@ const RoomService = require('../../services/rooms'),
     {getRoomUsers} = require('../../utils/users'),
     {schemaValidator} = require('../../helpers');
 const {DEFAULT_ITEMS_PER_PAGE} = require("../../config");
+const { makeRandomString } = require('../../utils/string_utils');
 exports.create = async (req, res) => {
     await schemaValidator(RoomSchema.create, {...req.query, ...req.body});
     let {start_at, end_at, name, is_scheduled,set,warm_up_down,rest,exercise_time,exercises,rest_interval,description,Attachment,filename} = req.body;
     let user = req.user;
     let tabataWorkout = await TabataWorkoutService.create({set,warm_up_down,rest,exercise_time,user,exercises,rest_interval});
     console.log('show the workout',tabataWorkout.id);
-    let awsResponse = await S3.upload({
-        filename,
+    
+    let {url} = filename && Attachment ? (await S3.upload({
+        filename:makeRandomString(15)+'.'+filename.split('.').slice(-1)[0],
         file:Attachment
-    }, process.env.S3_BUCKET, process.env.BUCKET_PATH)
-    const {url} = awsResponse;
+    }, process.env.S3_BUCKET, process.env.BUCKET_PATH)): {url:"https://image.shutterstock.com/image-photo/group-athletic-adult-men-women-600w-609082148.jpg"}
     let room = await RoomService.create({start_at, end_at, name, user, is_scheduled,tabata_workout_id:tabataWorkout.id,description,url});
+    console.log(`Room Created - room_uuid: ${room.room_uuid}, user_uuid: ${room.user.user_uuid}`);
     res.status(HttpStatusCodes.CREATED);
     return room;
 };
