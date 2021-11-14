@@ -1,6 +1,7 @@
 const Room = require('../../models/room');
 const User = require('../../models/user');
 const {MAX_ITEMS_PER_PAGE} = require("../../config");
+const NotificationService = require('../../services/notifications');
 const {UUIDGenerator} = require('../../helpers')
 require('dotenv').config({path: '../../.env'});
 exports.create = async ({start_at, end_at, name, user, is_scheduled,tabata_workout_id,description,url}) => {
@@ -55,7 +56,13 @@ exports.getRoom = async (id) => {
 };
 
 exports.inviteUsers = async (id, users) =>{
-    let roomObject = await Room.query().findOne({id});
+    let roomObject = await Room.query().findOne({room_uuid:id}).withGraphFetched('[user,tabata_workouts.[exercises]]');
     await roomObject.$relatedQuery('invited_users').relate(users);
+    let app_id = process.env.ONE_SIGNAL_APP_ID;
+    let data = {"foo":"bar"};
+    let contents = {en:`${roomObject.user.name} invited you to join his workout ${roomObject.tabata_workouts.name}`}
+    let template_id= '10dd6aef-9e6c-46be-8e9a-586b6beb98a2'
+    let include_external_user_ids = users;
+    await NotificationService.create({app_id,data,include_external_user_ids,template_id,contents});
     return roomObject.$query().withGraphFetched('[invited_users]')
 }

@@ -22,10 +22,9 @@ const {
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-// cron.schedule('* * * * * *', async function() {
-//     console.log('send a notification every 5 seconds');
-//     await roomToStart()
-// });
+cron.schedule('* * * * * *', async function() {
+    await roomToStart()
+});
 /**
  * Create HTTP server.
  */

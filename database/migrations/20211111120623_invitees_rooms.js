@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable("invitees_rooms", tbl => {
-        tbl.integer('user_id');
-        tbl.integer("room_id");
+        tbl.uuid('user_id');
+        tbl.uuid("room_id");
     });
 };
 

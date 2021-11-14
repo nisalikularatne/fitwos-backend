@@ -23,13 +23,13 @@ class Room extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: User,
                 join: {
-                    from: 'rooms.id',
+                    from: 'rooms.room_uuid',
                     through: {
                         // invitees_rooms is the join table.
                         from: 'invitees_rooms.room_id',
                         to: 'invitees_rooms.user_id'
                     },
-                    to: 'users.id'
+                    to: 'users.user_uuid'
                 }
             },
             user: {
