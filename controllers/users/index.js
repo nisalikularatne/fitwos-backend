@@ -74,3 +74,16 @@ exports.getRoomInvites = async (req,res)=>{
     const {id} = req.params;
     return UserService.invitedRooms(id);
 }
+
+exports.getUserSuggestions = async (req, res) => {
+    const {id} = req.user;
+    const {
+        page = 1,
+        page_size = DEFAULT_ITEMS_PER_PAGE,
+        query = null,
+        sort = 'created_at',
+        order = 'asc'
+    } = req.query;
+    await schemaValidator(UserSchema.getFollowing, {...req.query, ...req.body});
+    return UserService.getFollowing({page, page_size, query, sort, order,id});
+}

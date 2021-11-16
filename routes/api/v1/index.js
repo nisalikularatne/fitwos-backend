@@ -19,6 +19,7 @@ apiV1Routes.post('/users/follow',expressCallback(UserController.follow));
 apiV1Routes.post('/users/unfollow',expressCallback(UserController.unfollow));
 apiV1Routes.put('/users/:id',expressCallback(UserController.edit));
 apiV1Routes.get('/users/:id',expressCallback(UserController.get));
+apiV1Routes.get('/users/userSuggestion',expressCallback(UserController.getUserSuggestions));
 //rooms
 apiV1Routes.post('/rooms',expressCallback(RoomController.create));
 apiV1Routes.get('/rooms',expressCallback(RoomController.getAll));
