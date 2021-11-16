@@ -86,5 +86,5 @@ exports.getUserSuggestions = async (req, res) => {
         order = 'asc'
     } = req.query;
     await schemaValidator(UserSchema.getFollowing, {...req.query, ...req.body});
-    return UserService.getFollowing({page, page_size, query, sort, order,id});
+    return UserService.getSuggestion({page, page_size, query, sort, order,id});
 }

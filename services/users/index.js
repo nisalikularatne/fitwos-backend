@@ -106,3 +106,8 @@ exports.invitedRooms = async (id)=>{
     const user = await User.query().findOne({user_uuid: id}).throwIfNotFound();
     return user.$relatedQuery('invited_rooms');
 }
+
+exports.getSuggestion = async (object) => {
+    //TODO::Suggest more users?
+    return this.getFollowing(object);
+}
