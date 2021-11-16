@@ -77,6 +77,7 @@ exports.getRoomInvites = async (req,res)=>{
 
 exports.getUserSuggestions = async (req, res) => {
     const {id} = req.user;
+    console.log(id);
     const {
         page = 1,
         page_size = DEFAULT_ITEMS_PER_PAGE,
