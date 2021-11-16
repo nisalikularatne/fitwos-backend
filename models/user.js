@@ -31,13 +31,13 @@ class User extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: Room,
                 join: {
-                    from: 'users.id',
+                    from: 'users.user_uuid',
                     through: {
                         // invitees_rooms is the join table.
                         from: 'invitees_rooms.user_id',
                         to: 'invitees_rooms.room_id'
                     },
-                    to: 'rooms.id'
+                    to: 'rooms.room_uuid'
                 }
             },
             tabata_workouts:{
