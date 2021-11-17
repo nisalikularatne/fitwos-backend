@@ -42,4 +42,5 @@ apiV1Routes.post('/tabataWorkouts/:id',expressCallback(TabataWorkoutController.u
 apiV1Routes.delete('/tabataWorkouts/:id',expressCallback(TabataWorkoutController.delete));
 //notifications
 apiV1Routes.post('/notifications',expressCallback(NotificationController.create));
+apiV1Routes.get('/notifications',expressCallback(NotificationController.get));
 module.exports = apiV1Routes;

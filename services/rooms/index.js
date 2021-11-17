@@ -52,7 +52,7 @@ exports.delete = async (room_id) => {
 }
 
 exports.getRoom = async (id) => {
-    return Room.query().withGraphFetched('[user,tabata_workouts.[exercises]]').where('id', id).first().throwIfNotFound();
+    return Room.query().withGraphFetched('[user,tabata_workouts.[exercises]]').where('room_uuid', id).first().throwIfNotFound();
 };
 
 exports.inviteUsers = async (id, users) =>{
