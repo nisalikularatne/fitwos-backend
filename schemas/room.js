@@ -68,7 +68,7 @@ exports.delete = {
 exports.get = {
     schema: () => {
         return joi.object().keys({
-            id: joi.number().required()
+            id: joi.string().max(40).required()
         });
     }
 }
