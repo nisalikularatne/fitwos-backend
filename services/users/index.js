@@ -16,8 +16,9 @@ exports.getUser = async ({headers}) => {
         if (!user) {
             const {given_name, family_name, sub, email, email_verified, name, preferred_username} = userInfo.data;
             console.log(userInfo.data)
+            const preferred_name=preferred_username;
             user = await User.query().insert({
-                given_name, family_name, user_uuid: sub, email, email_verified, name, preferred_name=preferred_username
+                given_name, family_name, user_uuid: sub, email, email_verified, name, preferred_name
             })
         }
     }
