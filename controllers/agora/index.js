@@ -15,7 +15,7 @@ exports.generateToken = async (req, res) => {
     console.log('show user details',userObject);
     // res.header('location', `/users/${users.id}`);
     // res.status(HttpStatusCodes.CREATED);
-    let room = await Room.query().withGraphFetched('[user,tabata_workouts]').where('room_uuid', channelName).first().throwIfNotFound();
+    let room = await Room.query().withGraphFetched('[user,tabata_workouts.[exercises]]').where('room_uuid', channelName).first().throwIfNotFound();
     let userUUID = convertUUID4toUint32(userObject);
     room.agoraUID = userUUID
     return {...user,room};
