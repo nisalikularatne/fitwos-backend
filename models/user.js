@@ -17,7 +17,8 @@ class User extends Model {
 
     static get relationMappings() {
         const Room = require('../models/room');
-        const TabataWorkout = require('../models/tabataWorkout')
+        const TabataWorkout = require('../models/tabataWorkout');
+        const Notification = require('../models/notification');
         return {
             rooms: {
                 relation: Model.HasManyRelation,
@@ -59,6 +60,18 @@ class User extends Model {
                         to: 'follower_following.follower_id'
                     },
                     to: 'users.id'
+                }
+            },
+            notifications: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Notification,
+                join: {
+                    from: 'users.user_uuid',
+                    through: {
+                        from: 'users_notifications.notification_id',
+                        to: 'users_notifications.user_id'
+                    },
+                    to: 'notifications.notification_uuid'
                 }
             },
             following: {

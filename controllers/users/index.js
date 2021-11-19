@@ -88,3 +88,8 @@ exports.getUserSuggestions = async (req, res) => {
     await schemaValidator(UserSchema.getFollowing, {...req.query, ...req.body});
     return UserService.getSuggestion({page, page_size, query, sort, order,id});
 }
+
+exports.getUserNotification = async (req, res) => {
+      const {id} = req.params;
+      return UserService.getNotifications(id);
+}

@@ -11,14 +11,16 @@ exports.roomToStart = async()=>{
               let contents = {en:`The workout you created ${room.tabata_workouts.name} will start in 30 minutes`}
               let template_id = '45cd68a9-9cd7-4fff-95e2-8739f1c4e7dc';
               let include_external_user_ids = [room.user.user_uuid]
-              await NotificationService.create({app_id,data,include_external_user_ids,contents,template_id});
+              const notification = await NotificationService.create({app_id,data,include_external_user_ids,contents,template_id});
+          await notification.$relatedQuery('users').relate(include_external_user_ids);
               await room.invited_users.map(async invited_user=>{
                   let app_id = process.env.ONE_SIGNAL_APP_ID;
                   let data = {"foo":"bar"};
                   let contents = {en:`Your workout ${room.tabata_workouts.name} will start in 30 minutes`}
                   let template_id = '643a12dc-7920-478c-be9a-5a7bd67799de';
-                  let include_external_user_ids = [invited_user.user_uuid]
-                  await NotificationService.create({app_id,data,include_external_user_ids,contents,template_id});
+                  let include_external_user_ids = [invited_user.user_uuid];
+                  const notification = await NotificationService.create({app_id,data,include_external_user_ids,template_id,contents,type:'room_workout_in_30_minutes',room_uuid:room.room_uuid});
+                  await notification.$relatedQuery('users').relate(include_external_user_ids);
               })
 
       }

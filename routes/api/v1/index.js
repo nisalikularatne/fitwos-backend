@@ -11,6 +11,7 @@ const apiV1Routes = express.Router(),
 
 apiV1Routes.get('/users', expressCallback(UserController.getUser));
 apiV1Routes.get('/users/userSuggestion',expressCallback(UserController.getUserSuggestions));
+apiV1Routes.get('/users/:id/notifications',expressCallback(UserController.getUserNotification));
 apiV1Routes.get('/users/:id/invite',expressCallback(UserController.getRoomInvites));
 apiV1Routes.post('/users/imageUpload',expressCallback(UserController.imageUpload));
 apiV1Routes.get('/users/:id/getFollowers',expressCallback(UserController.getFollowers));

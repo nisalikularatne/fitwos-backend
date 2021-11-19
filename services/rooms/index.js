@@ -57,6 +57,7 @@ exports.getRoom = async (id) => {
 
 exports.inviteUsers = async (id, users) =>{
     let roomObject = await Room.query().findOne({room_uuid:id}).withGraphFetched('[user,tabata_workouts.[exercises]]');
+    console.log('show room object',roomObject);
     await roomObject.$relatedQuery('invited_users').unrelate().whereIn('user_id', users);
     await roomObject.$relatedQuery('invited_users').relate(users);
     let app_id = process.env.ONE_SIGNAL_APP_ID;
@@ -64,6 +65,8 @@ exports.inviteUsers = async (id, users) =>{
     let contents = {en:`${roomObject.user.name} invited you to join his workout ${roomObject.tabata_workouts.name}`}
     let template_id= '10dd6aef-9e6c-46be-8e9a-586b6beb98a2'
     let include_external_user_ids = users;
-    await NotificationService.create({app_id,data,include_external_user_ids,template_id,contents});
+    const notification = await NotificationService.create({app_id,data,include_external_user_ids,template_id,contents,type:'room_invite',room_uuid:roomObject.room_uuid});
+    console.log('show notification',notification);
+    await notification.$relatedQuery('users').relate(users);
     return roomObject.$query().withGraphFetched('[invited_users]')
 }

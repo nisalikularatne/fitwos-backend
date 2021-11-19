@@ -111,3 +111,8 @@ exports.getSuggestion = async (object) => {
     //TODO::Suggest more users?
     return this.getFollowing(object);
 }
+
+exports.getNotifications = async (id)=>{
+    const user = await User.query().findOne({user_uuid: id}).throwIfNotFound();
+    return user.$relatedQuery('notifications');
+}
