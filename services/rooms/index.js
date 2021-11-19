@@ -20,15 +20,29 @@ exports.getRooms = async ({
                               order = 'asc',
                               is_scheduled,
                               start_at,
-                              end_at
+                              end_at,
+                              categories,
+                              is_equipment,
+                              workout_level,
+                              workout_duration_min,
+                              workout_duration_max,
                           }) => {
-
+    const category_filters = categories && categories.split(',').map(c=>c.toLowerCase().trim());
     return Room.query().modify(builder => {
+        // TODO:: parse workout_level, workout_duration
         query && builder.where('name', 'like', `%${query}%`);
         start_at && builder.where('start_at', '>=', start_at);
         end_at && builder.where('end_at', '<=', end_at);
         start_at && end_at && builder.where('start_at', '>=', start_at) && builder.where('end_at', '<=', end_at);
         is_scheduled && builder.where('is_scheduled', is_scheduled);
+        
+        is_equipment && builder.joinRelated('[tabata_workouts.[exercises]]').where('tabata_workouts:exercises.is_equipment','=',is_equipment);
+        category_filters && builder.joinRelated('tabata_workouts.[exercises.[categories]]').whereIn('tabata_workouts:exercises:categories.name',category_filters);
+        // .joinRelated('exercises','tabata_workout_exercises.tabata_workout_id','=','tabata_workouts.id')
+        // .where('tabata_workout_exercises.exercise_id','=','exercises.id')
+        
+        // category_filters && builder.join('exercise_category', 'exercises.id', '=', 'exercise_category.exercise')
+        // .join('category','category.id','=','exercise_category.category').whereIn('category.name',category_filters);
         builder && builder.page(Number(page) - 1, page_size);
         builder.orderBy(sort, order);
     }).where({is_deleted: false}).withGraphFetched('[user,tabata_workouts.[exercises]]');

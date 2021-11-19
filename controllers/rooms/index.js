@@ -33,10 +33,15 @@ exports.getAll = async (req, res) => {
         order = 'asc',
         is_scheduled,
         start_at = null,
-        end_at = null
+        end_at = null,
+        categories,
+        is_equipment,
+        workout_level,
+        workout_duration_min,
+        workout_duration_max,
     } = req.query;
     await schemaValidator(RoomSchema.getAll, {...req.query, ...req.body});
-    let getResponse = await RoomService.getRooms({page, page_size, query, sort, order, is_scheduled, start_at, end_at});
+    let getResponse = await RoomService.getRooms({page, page_size, query, sort, order, is_scheduled, start_at, end_at, categories, is_equipment, workout_level, workout_duration_min, workout_duration_max});
     res.status(HttpStatusCodes.OK);
     return getResponse;
 }
