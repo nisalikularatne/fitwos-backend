@@ -32,8 +32,12 @@ exports.getAll = {
             is_scheduled: joi.boolean().optional(),
             page: joi.number().positive().allow('').optional(),
             page_size: joi.number().positive().max(MAX_ITEMS_PER_PAGE).allow('').optional(),
-            query: joi.any()
-
+            query: joi.any(),
+            categories:joi.any(),
+            is_equipment: joi.boolean().optional(),
+            workout_level: joi.string().valid('beginner','intermediate','advanced').allow('').optional(),
+            workout_duration_min: joi.number().positive().allow('').optional(),
+            workout_duration_max: joi.number().positive().allow('').optional(),
         });
     }
 }
