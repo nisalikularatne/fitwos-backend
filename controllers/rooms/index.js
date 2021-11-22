@@ -75,5 +75,6 @@ exports.inviteUsers = async (req,res)=> {
     let {id} = req.params;
     console.log('show room',id)
     let {user} = req.body
+    console.log('show req body user', user)
     return RoomService.inviteUsers(id,user);
 }

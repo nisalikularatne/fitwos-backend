@@ -72,6 +72,8 @@ exports.getRoom = async (id) => {
 exports.inviteUsers = async (id, users) =>{
     let roomObject = await Room.query().findOne({room_uuid:id}).withGraphFetched('[user,tabata_workouts.[exercises]]');
     console.log('show room object',roomObject);
+    console.log('show host id', users);
+    console.log('show invited user id', id);
     await roomObject.$relatedQuery('invited_users').unrelate().whereIn('user_id', users);
     await roomObject.$relatedQuery('invited_users').relate(users);
     let app_id = process.env.ONE_SIGNAL_APP_ID;
