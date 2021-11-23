@@ -29,6 +29,7 @@ apiV1Routes.post('/rooms/:id',expressCallback(RoomController.update));
 apiV1Routes.post('/rooms/:id/invite',expressCallback(RoomController.inviteUsers));
 apiV1Routes.delete('/rooms/:id',expressCallback(RoomController.delete));
 apiV1Routes.get('/rooms/participants/:room_uuid',expressCallback(RoomController.getParticipants));
+apiV1Routes.get('/rooms/:id/invited',expressCallback(RoomController.getInvitedUsers));
 //exercises
 apiV1Routes.get('/exercises',expressCallback(ExerciseController.getAll));
 apiV1Routes.post('/exercises',expressCallback(ExerciseController.create));

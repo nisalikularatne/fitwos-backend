@@ -77,3 +77,8 @@ exports.inviteUsers = async (req,res)=> {
     console.log(`room [${id}] invite users : ${users}`);
     return RoomService.inviteUsers(id,users);
 }
+
+exports.getInvitedUsers = async ( req, res) => {
+    let {id} = req.params;
+    return RoomService.getInvitedUsers(id);
+}

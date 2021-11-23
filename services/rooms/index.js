@@ -83,3 +83,7 @@ exports.inviteUsers = async (id, users) =>{
     await notification.$relatedQuery('users').relate(users);
     return roomObject.$query().withGraphFetched('[invited_users]')
 }
+
+exports.getInvitedUsers = async (roomId) => {
+    return await Room.query().findOne({room_uuid:roomId}).withGraphFetched('[invited_users]');
+}
