@@ -23,12 +23,12 @@ class Notification extends Model {
                 relation: Model.ManyToManyRelation,
                 modelClass: User,
                 join: {
-                    from: 'users.user_uuid',
+                    from: 'notifications.notification_uuid',
                     through: {
                         from: 'users_notifications.notification_id',
                         to: 'users_notifications.user_id'
                     },
-                    to: 'notifications.notification_uuid'
+                    to: 'users.user_uuid'
                 }
             },
             room:{
