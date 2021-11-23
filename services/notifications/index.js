@@ -14,13 +14,18 @@ exports.create = async ( body) => {
                data,
                contents,
                template_id,
-               content_available
+               content_available,
            },
            headers:{
                Authorization:`Bearer ${process.env.ONE_SIGNAL_API_KEY}`
            }
        });
-      return Notification.query().insert({notification_uuid:notification.data.id,type,room_uuid,message:contents.en});
+      return Notification.query().insert({
+          notification_uuid:notification.data.id || include_external_user_ids[0],
+          type,
+          room_uuid,
+          message:contents.en,
+        });
    }
    catch(e){
        throw e;
