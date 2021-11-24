@@ -55,10 +55,10 @@ module.exports = {
       connection: process.env.EC2_TEST_DATABASE_URL,
       ssl: true,
       migrations: {
-        directory: "./database/migrations"
+        directory: "database/migrations"
       },
       seeds: {
-        directory: "./database/seeds"
+        directory: "database/seeds"
       }
   },
   
