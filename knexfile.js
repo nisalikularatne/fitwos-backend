@@ -1,9 +1,6 @@
 require("dotenv").config();
 const pg = require("pg");
 // pg.defaults.ssl = true;
-console.log('show whats happening');
-console.log('check production',process.env.NODE_ENV);
-console.log('check database',process.env.DEV_DATABASE_URL)
 module.exports = {
   development: {
     client: "pg",
@@ -51,5 +48,18 @@ module.exports = {
     seeds: {
       directory: "./database/seeds"
     }
-  }
+  },
+  EC2_testing: {
+    client: "pg",
+      useNullAsDefault: true,
+      connection: process.env.EC2_TEST_DATABASE_URL,
+      ssl: true,
+      migrations: {
+        directory: "./database/migrations"
+      },
+      seeds: {
+        directory: "./database/seeds"
+      }
+  },
+  
 };

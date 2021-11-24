@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+require("dotenv").config();
 
 var app = require('./server');
 var debug = require('debug')('expressapp:server');
