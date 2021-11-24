@@ -25,7 +25,7 @@ exports.get = async(req, res) => {
                 created_at:new Date(),
                 notification_image_url:'https://image.shutterstock.com/image-photo/group-athletic-adult-men-women-600w-609082148.jpg',
                 type:'room-alert-30-minutes',
-                room_uuid:'560fa0e0-46c1-11ec-ad5a-b3bd99e04762'
+                room_uuid:'26d80f50-4d02-11ec-a913-695c3d8bcb36'
             },
             {
                 id:'AAAAAA-BBBBBB-DDDDDD-EEEEF',
@@ -33,7 +33,7 @@ exports.get = async(req, res) => {
                 created_at:new Date(),
                 notification_image_url:'https://image.shutterstock.com/image-photo/group-athletic-adult-men-women-600w-609082148.jpg',
                 type:'room-alert-30-minutes',
-                room_uuid:'560fa0e0-46c1-11ec-ad5a-b3bd99e04762'
+                room_uuid:'26d80f50-4d02-11ec-a913-695c3d8bcb36'
             },
             {
                 id:'AAAAAA-BBBBBB-DDDDDD-EEEEH',
@@ -41,7 +41,7 @@ exports.get = async(req, res) => {
                 created_at:new Date(),
                 notification_image_url:'https://image.shutterstock.com/image-photo/group-athletic-adult-men-women-600w-609082148.jpg',
                 type:'room-user-invitation',
-                room_uuid:'560fa0e0-46c1-11ec-ad5a-b3bd99e04762'
+                room_uuid:'26d80f50-4d02-11ec-a913-695c3d8bcb36'
             },
             {
                 id:'AAAAAA-BBBBBB-DDDDDD-EEEEG',
@@ -49,7 +49,7 @@ exports.get = async(req, res) => {
                 created_at:new Date(),
                 notification_image_url:'https://image.shutterstock.com/image-photo/group-athletic-adult-men-women-600w-609082148.jpg',
                 type:'room-user-joined',
-                room_uuid:'560fa0e0-46c1-11ec-ad5a-b3bd99e04762'
+                room_uuid:'26d80f50-4d02-11ec-a913-695c3d8bcb36'
             }
         ]
         ,total:4}
